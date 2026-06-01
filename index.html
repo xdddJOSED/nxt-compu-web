@@ -93,12 +93,21 @@
     }
 
     /* HERO CARDS */
+    /* CARRUSEL DE SERVICIOS */
     .hero-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      position: relative;
       width: 100%;
+      overflow: hidden;
     }
-    @media (max-width: 860px) { .hero-cards { grid-template-columns: 1fr; } }
+    .carousel-track {
+      display: flex;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
 
     .hero-card {
       position: relative;
@@ -107,8 +116,37 @@
       height: 420px;
       text-decoration: none;
       cursor: pointer;
+      flex: 0 0 33.333%;
+      scroll-snap-align: start;
     }
-    @media (max-width: 860px) { .hero-card { height: 320px; } }
+    @media (max-width: 860px)  { .hero-card { flex: 0 0 50%;   height: 340px; } }
+    @media (max-width: 560px)  { .hero-card { flex: 0 0 100%;  height: 320px; } }
+
+    /* BOTONES NAV CARRUSEL */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.25);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      padding: 0;
+    }
+    .carousel-btn:hover { background: var(--cyan); border-color: var(--cyan); }
+    .carousel-btn-prev { left: 12px; }
+    .carousel-btn-next { right: 12px; }
+    @media (max-width: 560px) { .carousel-btn { width: 36px; height: 36px; font-size: 1.3rem; } }
 
     .hero-card .hc-bg {
       position: absolute;
@@ -390,6 +428,8 @@
   <!-- HERO: 3 TARJETAS DE SERVICIOS -->
   <main id="servicios">
     <div class="hero-cards" role="region" aria-label="Nuestros servicios">
+      <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Anterior">&#8249;</button>
+      <div class="carousel-track" id="carouselTrack">
 
       <!-- Tarjeta 1: Camaras -->
       <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" class="hero-card hc-1" aria-label="Cotizar instalacion de camaras de seguridad">
@@ -442,6 +482,8 @@
         </div>
       </a>
 
+      </div><!-- /carousel-track -->
+      <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Siguiente">&#8250;</button>
     </div>
 
     <!-- FRANJA DE MARCAS: MARQUEE INFINITO -->
@@ -488,7 +530,7 @@
       <div class="info-text">
         <p class="eyebrow">Por que elegirnos?</p>
         <h2>Expertos en <span>tecnologia</span> que resuelven tu problema hoy</h2>
-        <p>En NXT COMPU con más de 10 años en experiencia combinamos tecnica real con precios competitivos. Ya sea que necesites instalar un sistema de vigilancia, reparar tu laptop o conseguir el repuesto exacto, somos tu aliado tecnologico de confianza.</p>
+        <p>En NXT COMPU con mï¿½s de 10 aï¿½os en experiencia combinamos tecnica real con precios competitivos. Ya sea que necesites instalar un sistema de vigilancia, reparar tu laptop o conseguir el repuesto exacto, somos tu aliado tecnologico de confianza.</p>
         <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" class="btn-cyan">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
@@ -512,6 +554,24 @@
     </nav>
     <p class="footer-copy">&copy; 2026 <span>NXT COMPU</span> &mdash; Todos los derechos reservados.</p>
   </footer>
+
+  <script>
+    (function () {
+      var track = document.getElementById('carouselTrack');
+      var btnPrev = document.getElementById('carouselPrev');
+      var btnNext = document.getElementById('carouselNext');
+      function slideWidth() {
+        var card = track.querySelector('.hero-card');
+        return card ? card.offsetWidth : track.offsetWidth;
+      }
+      btnNext.addEventListener('click', function () {
+        track.scrollBy({ left: slideWidth(), behavior: 'smooth' });
+      });
+      btnPrev.addEventListener('click', function () {
+        track.scrollBy({ left: -slideWidth(), behavior: 'smooth' });
+      });
+    })();
+  </script>
 
 </body>
 </html>
