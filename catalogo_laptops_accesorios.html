@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo — NXT COMPU</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cyan: #26C6DA;
+      --cyan-dark: #00ACC1;
+      --cyan-pale: #E0F7FA;
+      --dark: #1a1a2e;
+      --text: #222;
+      --muted: #666;
+      --border: #e4e4e4;
+      --white: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; background: #f5f6fa; color: var(--text); }
+
+    /* TOP BAR */
+    .top-bar {
+      background: var(--cyan);
+      color: #fff;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 7px 16px;
+      text-transform: uppercase;
+    }
+
+    /* HEADER */
+    .site-header {
+      background: var(--white);
+      border-bottom: 2px solid var(--cyan);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 84px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(38,198,218,0.10);
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 50px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { background: var(--cyan-pale); color: var(--cyan-dark); }
+    .btn-volver {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--dark);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 50px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-volver:hover { background: #2d2d4e; }
+    @media (max-width: 768px) {
+      .site-header { padding: 14px 16px 18px; flex-direction: column; gap: 12px; min-height: unset; }
+      .nav-links { display: none; }
+      .header-right { justify-content: center; }
+    }
+
+    /* LAYOUT */
+    .catalog-layout {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+    @media (max-width: 860px) {
+      .catalog-layout { flex-direction: column; }
+      .sidebar { width: 100% !important; }
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 20px;
+      position: sticky;
+      top: 100px;
+    }
+    .sidebar-title {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan-dark);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--cyan-pale);
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 9px 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      background: transparent;
+    }
+    .search-box button {
+      background: var(--cyan);
+      border: none;
+      padding: 9px 12px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .brand-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .brand-list li {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .brand-list li:hover { color: var(--cyan-dark); }
+    .brand-list li:last-child { border-bottom: none; }
+    .cat-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 5px 0;
+      cursor: pointer;
+    }
+    .cat-label input[type="checkbox"] {
+      accent-color: var(--cyan);
+      width: 15px;
+      height: 15px;
+    }
+
+    /* MAIN CONTENT */
+    .catalog-main { flex: 1; min-width: 0; }
+    .catalog-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .catalog-header h1 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .catalog-header h1 span { color: var(--cyan); }
+    .product-count {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* PRODUCT GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .product-grid { grid-template-columns: 1fr; } }
+
+    /* PRODUCT CARD */
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 32px rgba(38,198,218,0.15);
+      transform: translateY(-4px);
+    }
+    .product-img {
+      width: 100%;
+      height: 200px;
+      background: #eaecf0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b0b6c3;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #e4e7ef 25%, #f0f2f7 50%, #e4e7ef 75%);
+    }
+    .product-img span { position: relative; z-index: 1; }
+    .product-body { padding: 16px 16px 20px; }
+    .product-brand {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan-dark);
+      margin-bottom: 6px;
+    }
+    .product-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .product-price {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--cyan-dark);
+      margin-bottom: 14px;
+    }
+    .product-price span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+    .btn-consultar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 11px 16px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 3px 12px rgba(37,211,102,0.25);
+    }
+    .btn-consultar:hover { background: #1ebe5a; transform: translateY(-1px); }
+
+    /* FOOTER */
+    .site-footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 28px 20px;
+      margin-top: 60px;
+      font-size: 0.78rem;
+    }
+    .site-footer span { color: var(--cyan); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">🔴 Envíos a domicilio · Garantía en todos los productos · Cotiza ahora por WhatsApp</div>
+
+  <header class="site-header">
+    <a href="index.html" aria-label="NXT COMPU - Inicio">
+      <img src="img/logo.png" alt="NXT COMPU Logo" style="max-height: 80px; width: auto;" />
+    </a>
+    <div class="header-right">
+      <nav aria-label="Navegacion">
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <a href="index.html" class="btn-volver">
+        ← Volver al Inicio
+      </a>
+    </div>
+  </header>
+
+  <div class="catalog-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Buscador -->
+      <div class="search-box">
+        <input type="text" placeholder="Buscar producto..." aria-label="Buscar producto" />
+        <button aria-label="Buscar">&#128269;</button>
+      </div>
+
+      <!-- Marcas -->
+      <p class="sidebar-title">Marcas</p>
+      <ul class="brand-list">
+        <li>Dell</li>
+        <li>Acer</li>
+        <li>MSI</li>
+        <li>Kingston</li>
+        <li>Samsung</li>
+        <li>HP</li>
+        <li>Lenovo</li>
+      </ul>
+
+      <!-- Categorías -->
+      <p class="sidebar-title">Categorías</p>
+      <label class="cat-label"><input type="checkbox" /> Laptops Importadas</label>
+      <label class="cat-label"><input type="checkbox" /> Almacenamiento SSD / NVMe</label>
+      <label class="cat-label"><input type="checkbox" /> Accesorios</label>
+      <label class="cat-label"><input type="checkbox" /> Repuestos para Laptop</label>
+      <label class="cat-label"><input type="checkbox" /> Componentes PC</label>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="catalog-main">
+
+      <div class="catalog-header">
+        <h1>Catálogo de <span>Equipos y Repuestos</span></h1>
+        <p class="product-count">4 productos</p>
+      </div>
+
+      <div class="product-grid">
+
+        <!-- Producto 1 -->
+        <div class="product-card">
+          <div class="product-img"><span>Foto del producto</span></div>
+          <div class="product-body">
+            <p class="product-brand">Dell</p>
+            <p class="product-name">Dell Latitude 5420 Core i7 — 16GB RAM · 512GB SSD</p>
+            <p class="product-price">$899 <span>USD</span></p>
+            <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU,%20me%20interesa%20el%20Dell%20Latitude%205420%20Core%20i7.%20%C2%BFTiene%20disponibilidad?" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Consultar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="product-card">
+          <div class="product-img"><span>Foto del producto</span></div>
+          <div class="product-body">
+            <p class="product-brand">Acer</p>
+            <p class="product-name">Acer Nitro 5 Gaming — Ryzen 7 · RTX 3060 · 16GB</p>
+            <p class="product-price">$1,150 <span>USD</span></p>
+            <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU,%20me%20interesa%20el%20Acer%20Nitro%205%20Gaming.%20%C2%BFTiene%20disponibilidad?" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Consultar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="product-card">
+          <div class="product-img"><span>Foto del producto</span></div>
+          <div class="product-body">
+            <p class="product-brand">Samsung</p>
+            <p class="product-name">SSD Samsung 990 Pro Gen4 512GB NVMe M.2</p>
+            <p class="product-price">$89 <span>USD</span></p>
+            <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU,%20me%20interesa%20el%20SSD%20Samsung%20Gen4%20512GB.%20%C2%BFTiene%20disponibilidad?" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Consultar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="product-card">
+          <div class="product-img"><span>Foto del producto</span></div>
+          <div class="product-body">
+            <p class="product-brand">Kingston</p>
+            <p class="product-name">Disco Sólido Kingston KC3000 1TB NVMe PCIe 4.0</p>
+            <p class="product-price">$129 <span>USD</span></p>
+            <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU,%20me%20interesa%20el%20SSD%20Kingston%201TB%20NVMe.%20%C2%BFTiene%20disponibilidad?" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Consultar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /product-grid -->
+    </main>
+
+  </div><!-- /catalog-layout -->
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <span>NXT COMPU</span> &mdash; Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
