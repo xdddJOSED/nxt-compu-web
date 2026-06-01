@@ -204,14 +204,47 @@
       font-weight: 600;
     }
 
-    /* PRODUCT GRID */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    /* PRODUCT GRID — usa w3-row-padding + w3-col l4 m6 s12 */
+    .product-img img { width: 100%; height: 200px; object-fit: contain; display: block; }
+
+    /* BADGES */
+    .badge-stock {
+      display: inline-block;
+      background: var(--cyan-pale);
+      color: var(--cyan-dark);
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
     }
-    @media (max-width: 860px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .product-grid { grid-template-columns: 1fr; } }
+    .badge-credit {
+      display: inline-block;
+      background: #fff3cd;
+      color: #856404;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      margin-left: 4px;
+      border: 1px solid #ffc107;
+    }
+    .product-specs {
+      font-size: 0.74rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .product-sku {
+      font-size: 0.65rem;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
 
     /* PRODUCT CARD */
     .product-card {
@@ -240,13 +273,7 @@
       position: relative;
       overflow: hidden;
     }
-    .product-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #e4e7ef 25%, #f0f2f7 50%, #e4e7ef 75%);
-    }
-    .product-img span { position: relative; z-index: 1; }
+    .product-img img { width: 100%; height: 200px; object-fit: contain; display: block; background: #f5f6fa; }
     .product-body { padding: 16px 16px 20px; }
     .product-brand {
       font-size: 0.62rem;
@@ -368,64 +395,183 @@
 
       <div class="catalog-header">
         <h1>Catálogo de <span>Equipos y Repuestos</span></h1>
-        <p class="product-count">4 productos</p>
+        <p class="product-count">10 productos</p>
       </div>
 
-      <div class="product-grid">
+      <div class="w3-row-padding">
 
-        <!-- Producto 1 -->
-        <div class="product-card">
-          <div class="product-img"><span>Foto del producto</span></div>
-          <div class="product-body">
-            <p class="product-brand">Dell</p>
-            <p class="product-name">Dell Latitude 5420 Core i7 — 16GB RAM · 512GB SSD</p>
-            <p class="product-price">$899 <span>USD</span></p>
-            <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU,%20me%20interesa%20el%20Dell%20Latitude%205420%20Core%20i7.%20%C2%BFTiene%20disponibilidad?" target="_blank" rel="noopener noreferrer" class="btn-consultar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              Consultar por WhatsApp
-            </a>
+        <!-- Producto 1: HP (PRIORIDAD) -->
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/LAPTOP_HP_15-FD0260LA.jpg" alt="Laptop HP 15-FD0260LA" /></div>
+            <div class="product-body">
+              <div>
+                <span class="badge-stock">Stock: 1</span>
+                <span class="badge-credit">&#128179; Aceptamos todas las tarjetas de cr&eacute;dito</span>
+              </div>
+              <p class="product-brand">HP</p>
+              <p class="product-name">LAPTOP HP 15-FD0260LA INTEL CORE I5-1334U</p>
+              <p class="product-price">$679.99 <span>USD</span></p>
+              <p class="product-specs">Pantalla FHD 15.6" · DDR4 8GB · 512GB SSD</p>
+              <p class="product-sku">Categoría: PORTÁTILES · SKU: 198990787480</p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20la%20Laptop%20HP%2015-FD0260LA%20Intel%20Core%20i5-1334U.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- Producto 2 -->
-        <div class="product-card">
-          <div class="product-img"><span>Foto del producto</span></div>
-          <div class="product-body">
-            <p class="product-brand">Acer</p>
-            <p class="product-name">Acer Nitro 5 Gaming — Ryzen 7 · RTX 3060 · 16GB</p>
-            <p class="product-price">$1,150 <span>USD</span></p>
-            <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU,%20me%20interesa%20el%20Acer%20Nitro%205%20Gaming.%20%C2%BFTiene%20disponibilidad?" target="_blank" rel="noopener noreferrer" class="btn-consultar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              Consultar por WhatsApp
-            </a>
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/ENCLOSURE_ARGON_AC.jpg" alt="Enclosure Argon AC-1038 NVMe" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 2</span>
+              <p class="product-brand">Argon</p>
+              <p class="product-name">ENCLOSURE ARGON AC-1038 M.2 NVMe PCI-E SSD</p>
+              <p class="product-price">$30.00 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20el%20Enclosure%20Argon%20AC-1038%20M.2%20NVMe.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- Producto 3 -->
-        <div class="product-card">
-          <div class="product-img"><span>Foto del producto</span></div>
-          <div class="product-body">
-            <p class="product-brand">Samsung</p>
-            <p class="product-name">SSD Samsung 990 Pro Gen4 512GB NVMe M.2</p>
-            <p class="product-price">$89 <span>USD</span></p>
-            <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU,%20me%20interesa%20el%20SSD%20Samsung%20Gen4%20512GB.%20%C2%BFTiene%20disponibilidad?" target="_blank" rel="noopener noreferrer" class="btn-consultar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              Consultar por WhatsApp
-            </a>
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/CASE_ALTEK.jpg" alt="Case Altek Mid-Tower 4300" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 1</span>
+              <p class="product-brand">Altek</p>
+              <p class="product-name">CASE ALTEK MID-TOWER 4300 NEGRO</p>
+              <p class="product-price">$44.99 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20el%20Case%20Altek%20Mid-Tower%204300%20Negro.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- Producto 4 -->
-        <div class="product-card">
-          <div class="product-img"><span>Foto del producto</span></div>
-          <div class="product-body">
-            <p class="product-brand">Kingston</p>
-            <p class="product-name">Disco Sólido Kingston KC3000 1TB NVMe PCIe 4.0</p>
-            <p class="product-price">$129 <span>USD</span></p>
-            <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU,%20me%20interesa%20el%20SSD%20Kingston%201TB%20NVMe.%20%C2%BFTiene%20disponibilidad?" target="_blank" rel="noopener noreferrer" class="btn-consultar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              Consultar por WhatsApp
-            </a>
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/FUENTE%20_PODER_%20ALTEK.jpg" alt="Fuente de Poder Altek ATX 900W" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 5</span>
+              <p class="product-brand">Altek</p>
+              <p class="product-name">FUENTE DE PODER ALTEK ATX 900W 24P</p>
+              <p class="product-price">$19.99 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20la%20Fuente%20de%20Poder%20Altek%20ATX%20900W.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 5 -->
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/COMBO_TECLADO_MOUSE_ARGOM.jpg" alt="Combo Teclado-Mouse Argom ARG-KB-7418" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 1</span>
+              <p class="product-brand">Argom</p>
+              <p class="product-name">COMBO TECLADO-MOUSE ARGOM ARG-KB-7418 USB NEGRO</p>
+              <p class="product-price">$17.99 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20el%20Combo%20Teclado-Mouse%20Argom%20ARG-KB-7418.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/COMBO_TECLADO_MOUSE_RECARGABLE_%20MULT_%7DQUASAD.jpg" alt="Combo Teclado-Mouse Recargable Quasad" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 1</span>
+              <p class="product-brand">Quasad</p>
+              <p class="product-name">COMBO TECLADO-MOUSE RECARGABLE MULT. QUASAD</p>
+              <p class="product-price">$24.99 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20el%20Combo%20Teclado-Mouse%20Recargable%20Quasad.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 7 -->
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/MOUSE_QUASAD_QM_610.jpg" alt="Mouse Quasad QM-610 Wireless" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 9</span>
+              <p class="product-brand">Quasad</p>
+              <p class="product-name">MOUSE QUASAD QM-610 WIRELESS ROJO</p>
+              <p class="product-price">$8.00 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20el%20Mouse%20Quasad%20QM-610%20Wireless%20Rojo.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 8 -->
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/TECLADO_ARGOM_ARG_KB_7807_USB_NEGRO.jpg" alt="Teclado Argom ARG-KB-7807 USB" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 5</span>
+              <p class="product-brand">Argom</p>
+              <p class="product-name">TECLADO ARGOM ARG-KB-7807 USB NEGRO</p>
+              <p class="product-price">$11.99 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20el%20Teclado%20Argom%20ARG-KB-7807.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 9 -->
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/HUB_TREQA_USB_TYPE_TO_%204_PUESTOS%20.jpg" alt="Hub Treqa USB Type-C 4 Puestos" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 3</span>
+              <p class="product-brand">Treqa</p>
+              <p class="product-name">HUB TREQA USB TYPE-C TO 4 PUESTOS USB 3.0 SILVER</p>
+              <p class="product-price">$9.99 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20el%20Hub%20Treqa%20USB%20Type-C%204%20Puestos%20USB%203.0.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 10 -->
+        <div class="w3-col l4 m6 s12" style="margin-bottom:20px">
+          <div class="product-card">
+            <div class="product-img"><img src="img/Catalogo_laptops_accesorios/HUB_USB-C_CON_11_EN_1_AV_VGA_RJ45_SD_TF_HDMI.jpg" alt="Hub USB-C 11 en 1" /></div>
+            <div class="product-body">
+              <span class="badge-stock">Stock: 1</span>
+              <p class="product-brand">USB-C Hub</p>
+              <p class="product-name">HUB USB-C CON 11 EN 1 AV VGA RJ45 SD-TF HDMI</p>
+              <p class="product-price">$59.99 <span>USD</span></p>
+              <a href="https://wa.me/593994702091?text=Hola%20NXT%20COMPU%2C%20me%20interesa%20el%20Hub%20USB-C%2011%20en%201.%20%C2%BFTiene%20disponibilidad%3F" target="_blank" rel="noopener noreferrer" class="btn-consultar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
