@@ -93,29 +93,18 @@
     }
 
     /* LAYOUT */
-    .catalog-layout {
+    .catalog-wrapper {
       max-width: 1200px;
       margin: 32px auto;
-      padding: 0 20px;
-      display: flex;
-      gap: 28px;
-      align-items: flex-start;
-    }
-    @media (max-width: 860px) {
-      .catalog-layout { flex-direction: column; }
-      .sidebar { width: 100% !important; }
+      padding: 0 16px;
     }
 
     /* SIDEBAR */
     .sidebar {
-      width: 260px;
-      flex-shrink: 0;
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 24px 20px;
-      position: sticky;
-      top: 100px;
     }
     .sidebar-title {
       font-size: 0.7rem;
@@ -183,7 +172,7 @@
     }
 
     /* MAIN CONTENT */
-    .catalog-main { flex: 1; min-width: 0; }
+    .catalog-main { min-width: 0; }
     .catalog-header {
       display: flex;
       align-items: center;
@@ -265,15 +254,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #b0b6c3;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      position: relative;
       overflow: hidden;
     }
-    .product-img img { width: 100%; height: 200px; object-fit: contain; display: block; background: #f5f6fa; }
+    .product-img img { width: 100%; max-width: 100%; height: 200px; object-fit: contain; display: block; background: #f5f6fa; overflow: hidden; }
     .product-body { padding: 16px 16px 20px; }
     .product-brand {
       font-size: 0.62rem;
@@ -357,10 +340,11 @@
     </div>
   </header>
 
-  <div class="catalog-layout">
+  <div class="catalog-wrapper">
+    <div class="w3-row">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="w3-col l3 m4 s12 w3-margin-bottom sidebar">
 
       <!-- Buscador -->
       <div class="search-box">
@@ -391,7 +375,7 @@
     </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="catalog-main">
+    <main class="w3-col l9 m8 s12 catalog-main">
 
       <div class="catalog-header">
         <h1>Catálogo de <span>Equipos y Repuestos</span></h1>
@@ -576,8 +560,8 @@
 
       </div><!-- /product-grid -->
     </main>
-
-  </div><!-- /catalog-layout -->
+  </div><!-- /w3-row -->
+  </div><!-- /catalog-wrapper -->
 
   <footer class="site-footer">
     <p>&copy; 2026 <span>NXT COMPU</span> &mdash; Todos los derechos reservados.</p>
