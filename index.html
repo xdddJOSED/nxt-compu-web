@@ -3,133 +3,276 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NXT COMPU - Tecnologia al Siguiente Nivel</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <title>NXT COMPU — Tecnología al Siguiente Nivel</title>
+  <meta name="description" content="NXT COMPU: Expertos en tecnología con más de 10 años de experiencia. Cámaras de seguridad Hikvision, servicio técnico de laptops, venta de equipos y accesorios. Jipijapa, Ecuador." />
+  <meta property="og:title" content="NXT COMPU — Tecnología al Siguiente Nivel" />
+  <meta property="og:description" content="Tu aliado tecnológico de confianza. Cámaras Hikvision, servicio técnico y venta de laptops." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nxt-compu-web.onrender.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
+    /* ============================================
+       NXT COMPU — Design System
+       ============================================ */
     :root {
-      --cyan: #26C6DA;
-      --cyan-dark: #00ACC1;
-      --cyan-pale: #E0F7FA;
-      --dark: #1a1a2e;
-      --text: #222;
-      --muted: #666;
-      --border: #e4e4e4;
+      --cyan: #00D4FF;
+      --cyan-dark: #00A8CC;
+      --cyan-deep: #0891B2;
+      --cyan-pale: rgba(0, 212, 255, 0.08);
+      --cyan-glow: rgba(0, 212, 255, 0.25);
+      --dark-900: #0B0F19;
+      --dark-800: #111827;
+      --dark-700: #1A2035;
+      --dark-600: #243049;
+      --dark-500: #2D3A52;
       --white: #ffffff;
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --green-wa: #25D366;
+      --green-wa-hover: #1EBE5A;
+      --gradient-hero: linear-gradient(160deg, #0B0F19 0%, #111827 40%, #0E2A3D 100%);
+      --gradient-cyan: linear-gradient(135deg, #00D4FF, #0891B2);
+      --gradient-card: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(8,145,178,0.03));
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.15);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.2);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.3);
+      --shadow-glow: 0 0 40px rgba(0,212,255,0.2);
+      --transition-fast: 0.2s cubic-bezier(0.4,0,0.2,1);
+      --transition-smooth: 0.4s cubic-bezier(0.4,0,0.2,1);
+      --transition-spring: 0.6s cubic-bezier(0.34,1.56,0.64,1);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Montserrat', sans-serif; background: #f5f6fa; color: var(--text); }
 
-    /* TOP BAR */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', 'Montserrat', -apple-system, sans-serif;
+      background: var(--dark-900);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    ::selection { background: rgba(0,212,255,0.3); }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.9); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ============================================
+       TOP BAR
+       ============================================ */
     .top-bar {
-      background: var(--cyan);
+      background: linear-gradient(90deg, var(--cyan-dark), var(--cyan-deep));
       color: #fff;
       text-align: center;
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.08em;
-      padding: 7px 16px;
+      padding: 8px 16px;
       text-transform: uppercase;
+      position: relative;
+      z-index: 201;
     }
 
-    /* HEADER */
+    /* ============================================
+       NAVBAR
+       ============================================ */
     .site-header {
-      background: var(--white);
-      border-bottom: 2px solid var(--cyan);
-      padding: 0 40px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 90px;
       position: sticky;
       top: 0;
       z-index: 200;
-      box-shadow: 0 2px 12px rgba(38,198,218,0.10);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80px;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+      transition: var(--transition-smooth);
+    }
+    .site-header.scrolled {
+      background: rgba(11, 15, 25, 0.95);
+      border-bottom-color: rgba(0, 212, 255, 0.2);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
     .header-right {
       display: flex;
       align-items: center;
       gap: 16px;
-      flex-wrap: wrap;
     }
     .nav-links {
       display: flex;
       gap: 4px;
-      list-style: none;
     }
     .nav-links a {
       font-size: 0.88rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
+      color: var(--text-secondary);
       padding: 9px 18px;
-      border-radius: 50px;
-      transition: background 0.2s, color 0.2s;
+      border-radius: var(--radius-full);
+      transition: var(--transition-fast);
+      position: relative;
     }
-    .nav-links a:hover { background: var(--cyan-pale); color: var(--cyan-dark); }
-    .nav-links a.active { background: var(--cyan); color: #fff; }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--gradient-cyan);
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a:hover::after { width: 60%; }
+    .nav-links a.active {
+      background: var(--gradient-cyan);
+      color: #fff;
+    }
+    .nav-links a.active::after { display: none; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: var(--text-primary);
+      border-radius: 3px;
+      transition: var(--transition-smooth);
+      transform-origin: center;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -5px); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 15, 25, 0.97);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-nav a {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: var(--transition-fast);
+    }
+    .mobile-nav a:hover { color: var(--cyan); }
+
+    /* WhatsApp header button */
     .btn-whatsapp {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #25D366;
-      color: #ffffff;
-      font-family: 'Montserrat', sans-serif;
+      background: var(--green-wa);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
       font-weight: 800;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      text-decoration: none;
-      padding: 13px 26px;
-      border-radius: 50px;
-      transition: background 0.2s, transform 0.15s;
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      transition: var(--transition-spring);
       white-space: nowrap;
-      box-shadow: 0 4px 14px rgba(37,211,102,0.3);
+      box-shadow: 0 4px 18px rgba(37,211,102,0.3);
     }
-    .btn-whatsapp:hover { background: #1ebe5a; transform: translateY(-2px); }
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .site-header {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: auto;
-        min-height: unset;
-        padding: 14px 16px 20px;
-        gap: 15px;
-      }
-      .header-right { justify-content: center; }
-      .btn-whatsapp { font-size: 0.78rem; padding: 10px 20px; gap: 6px; }
-    }
-    @media (max-width: 400px) {
-      .btn-whatsapp span.btn-label { display: none; }
-    }
+    .btn-whatsapp:hover { background: var(--green-wa-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
 
-    /* HERO CARDS */
-    /* CARRUSEL DE SERVICIOS */
+    /* ============================================
+       HERO CAROUSEL
+       ============================================ */
+    .carousel-section {
+      padding: 32px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
     .carousel-wrapper {
-      max-width: 1200px;
-      margin: 40px auto;
-      border-radius: 25px;
+      border-radius: var(--radius-xl);
       overflow: hidden;
       position: relative;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(0,212,255,0.08);
     }
-    @media (max-width: 1280px) { .carousel-wrapper { margin: 32px 24px; } }
-    @media (max-width: 560px)  { .carousel-wrapper { margin: 20px 12px; border-radius: 16px; } }
-
-    .hero-cards {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
+    .hero-cards { position: relative; width: 100%; overflow: hidden; }
     .carousel-track {
       display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
       overflow-x: hidden;
       scroll-behavior: smooth;
       scroll-snap-type: x mandatory;
@@ -142,199 +285,355 @@
       position: relative;
       display: block;
       overflow: hidden;
-      height: 450px;
+      height: 550px;
       text-decoration: none;
       cursor: pointer;
       flex: 0 0 100%;
       width: 100%;
       scroll-snap-align: start;
     }
-    @media (min-width: 769px) { .hero-card { height: 600px; } }
-    @media (max-width: 768px) { .hero-card { height: 380px; } }
-    @media (max-width: 560px) { .hero-card { height: 350px; } }
-
-    /* BOTONES NAV CARRUSEL */
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      background: rgba(0,0,0,0.45);
-      color: #fff;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 50%;
-      width: 54px;
-      height: 54px;
-      font-size: 2rem;
-      line-height: 1;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-      padding: 0;
-      backdrop-filter: blur(4px);
-    }
-    .carousel-btn:hover { background: var(--cyan); border-color: var(--cyan); transform: translateY(-50%) scale(1.08); }
-    .carousel-btn-prev { left: 20px; }
-    .carousel-btn-next { right: 20px; }
-    @media (max-width: 560px) { .carousel-btn { width: 40px; height: 40px; font-size: 1.4rem; } }
-
-    /* DOTS INDICADORES */
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 0 12px;
-      background: rgba(26,26,46,0.92);
-    }
-    .carousel-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.25s, transform 0.25s;
-    }
-    .carousel-dot.active { background: var(--cyan); transform: scale(1.3); }
-    .carousel-dot:hover  { background: rgba(255,255,255,0.7); }
-
     .hero-card .hc-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
-      transition: transform 0.5s ease;
+      transition: transform 8s ease;
     }
+    .hero-card.active .hc-bg { transform: scale(1.08); }
     .hero-card:hover .hc-bg { transform: scale(1.06); }
-
-    .hc-1 .hc-bg {
-      background: url('img/catalogos/camaras_seguridad.jpeg');
-      background-size: cover;
-      background-position: center;
-    }
-    .hc-2 .hc-bg {
-      background: url('img/catalogos/reparacion_laptops.jpeg');
-      background-size: cover;
-      background-position: center;
-    }
-    .hc-3 .hc-bg {
-      background: url('img/catalogos/laptops_accesorios.jpeg');
-      background-size: cover;
-      background-position: center;
-    }
+    .hc-1 .hc-bg { background: url('img/catalogos/camaras_seguridad.jpeg'); background-size: cover; background-position: center; }
+    .hc-2 .hc-bg { background: url('img/catalogos/reparacion_laptops.jpeg'); background-size: cover; background-position: center; }
+    .hc-3 .hc-bg { background: url('img/catalogos/laptops_accesorios.jpeg'); background-size: cover; background-position: center; }
 
     .hero-card .hc-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.72) 100%);
+      background: linear-gradient(180deg, rgba(11,15,25,0.4) 0%, rgba(11,15,25,0.2) 40%, rgba(11,15,25,0.85) 100%);
     }
     .hero-card::after {
       content: '';
       position: absolute;
       inset: 0;
-      border: 3px solid transparent;
+      border: 2px solid transparent;
       pointer-events: none;
       transition: border-color 0.3s;
+      border-radius: inherit;
     }
-    .hero-card:hover::after { border-color: var(--cyan); }
-    .hero-card + .hero-card { border-left: 2px solid rgba(38,198,218,0.25); }
-    @media (max-width: 860px) {
-      .hero-card + .hero-card { border-left: none; border-top: 2px solid rgba(38,198,218,0.25); }
-    }
+    .hero-card:hover::after { border-color: rgba(0,212,255,0.4); }
 
     .hc-content {
       position: absolute;
       top: 0; left: 0; right: 0;
-      padding: 36px 70px 20px;
+      padding: 40px 60px 20px;
+      z-index: 2;
     }
     .hc-badge {
-      display: inline-block;
-      background: var(--cyan);
-      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,212,255,0.15);
+      border: 1px solid rgba(0,212,255,0.3);
+      color: var(--cyan);
       font-size: 0.7rem;
       font-weight: 800;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      padding: 6px 18px;
-      border-radius: 3px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
       margin-bottom: 18px;
+      backdrop-filter: blur(10px);
     }
     .hc-title {
-      font-size: clamp(1.2rem, 4vw, 2.8rem);
+      font-size: clamp(1.4rem, 4vw, 3rem);
       font-weight: 900;
       text-transform: uppercase;
       color: #fff;
-      line-height: 1.15;
-      letter-spacing: 0.02em;
-      text-shadow: 0 3px 18px rgba(0,0,0,0.7);
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+      text-shadow: 0 3px 20px rgba(0,0,0,0.5);
       max-width: 640px;
     }
     .hc-bottom {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 20px 70px 32px;
+      padding: 20px 60px 36px;
+      z-index: 2;
     }
     .hc-sub {
-      font-size: clamp(0.78rem, 1.4vw, 1rem);
-      color: rgba(255,255,255,0.85);
+      font-size: clamp(0.8rem, 1.4vw, 1rem);
+      color: rgba(255,255,255,0.8);
       line-height: 1.6;
-      margin-bottom: 18px;
-      max-width: 580px;
-    }
-    @media (max-width: 560px) {
-      .hc-content { padding: 24px 56px 16px; }
-      .hc-bottom  { padding: 14px 56px 24px; }
-      .hc-badge   { font-size: 0.6rem; padding: 4px 12px; margin-bottom: 10px; }
-      .hc-sub     { display: none; }
+      margin-bottom: 20px;
+      max-width: 540px;
     }
     .hc-cta {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: var(--cyan);
+      background: var(--gradient-cyan);
       color: #fff;
       font-size: 0.82rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 14px 28px;
-      border-radius: 5px;
-      transition: background 0.2s, gap 0.2s, transform 0.2s;
-      box-shadow: 0 4px 18px rgba(38,198,218,0.4);
+      border-radius: var(--radius-sm);
+      transition: var(--transition-spring);
+      box-shadow: 0 4px 20px rgba(0,212,255,0.3);
     }
-    .hero-card:hover .hc-cta { background: var(--cyan-dark); gap: 14px; transform: translateY(-2px); }
+    .hero-card:hover .hc-cta { gap: 14px; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,255,0.4); }
 
-    /* MARQUEE DE MARCAS */
+    /* Carousel buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-spring);
+    }
+    .carousel-btn:hover { background: rgba(0,212,255,0.3); border-color: var(--cyan); transform: translateY(-50%) scale(1.1); }
+    .carousel-btn-prev { left: 16px; }
+    .carousel-btn-next { right: 16px; }
+
+    /* Carousel dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 0;
+      background: rgba(11,15,25,0.9);
+      backdrop-filter: blur(10px);
+    }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .carousel-dot.active { background: var(--cyan); transform: scale(1.3); box-shadow: 0 0 12px rgba(0,212,255,0.5); }
+    .carousel-dot:hover { background: rgba(255,255,255,0.5); }
+
+    /* ============================================
+       STATS SECTION
+       ============================================ */
+    .stats-section {
+      padding: 60px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat-card {
+      text-align: center;
+      padding: 32px 16px;
+      background: var(--gradient-card);
+      border: 1px solid rgba(0,212,255,0.08);
+      border-radius: var(--radius-lg);
+      transition: var(--transition-spring);
+    }
+    .stat-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,212,255,0.2);
+      box-shadow: var(--shadow-glow);
+    }
+    .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--cyan);
+      line-height: 1;
+    }
+    .stat-suffix {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ============================================
+       SERVICES SECTION
+       ============================================ */
+    .services-section {
+      padding: 80px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.15);
+      color: var(--cyan);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 900;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .text-gradient {
+      background: var(--gradient-cyan);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 550px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+      padding: 40px 28px;
+      text-align: center;
+      transition: var(--transition-spring);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-card);
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0,212,255,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(0,212,255,0.1);
+      border: 2px solid rgba(0,212,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+      transition: var(--transition-spring);
+    }
+    .service-card:hover .service-icon {
+      background: rgba(0,212,255,0.2);
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(0,212,255,0.2);
+    }
+    .service-icon svg { width: 28px; height: 28px; color: var(--cyan); }
+    .service-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .service-card .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--cyan);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+      transition: var(--transition-fast);
+    }
+    .service-card:hover .service-link { gap: 10px; }
+
+    /* ============================================
+       BRANDS MARQUEE
+       ============================================ */
     .brands-section {
-      background: #f0f2f6;
-      border-top: 4px solid var(--cyan);
-      border-bottom: 1px solid #dde0e8;
-      padding: 36px 0 32px;
+      background: var(--dark-800);
+      border-top: 1px solid rgba(0,212,255,0.08);
+      border-bottom: 1px solid rgba(0,212,255,0.08);
+      padding: 48px 0 40px;
+      position: relative;
+      overflow: hidden;
     }
     .brands-label {
-      font-size: 1rem;
+      font-size: 0.85rem;
       font-weight: 800;
       letter-spacing: 0.12em;
-      color: var(--dark);
+      color: var(--text-secondary);
       text-transform: uppercase;
       text-align: center;
       margin-bottom: 6px;
     }
     .brands-sublabel {
       font-size: 0.78rem;
-      color: #7a8090;
+      color: var(--text-muted);
       text-align: center;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
     .brands-divider {
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-      max-width: 280px;
-      margin: 0 auto 24px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan-dark), transparent);
+      max-width: 200px;
+      margin: 0 auto 28px;
     }
     .marquee-wrapper {
       overflow: hidden;
@@ -345,23 +644,19 @@
       content: '';
       position: absolute;
       top: 0; bottom: 0;
-      width: 100px;
+      width: 120px;
       z-index: 2;
       pointer-events: none;
     }
-    .marquee-wrapper::before { left: 0; background: linear-gradient(to right, #f0f2f6, transparent); }
-    .marquee-wrapper::after  { right: 0; background: linear-gradient(to left, #f0f2f6, transparent); }
+    .marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--dark-800), transparent); }
+    .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--dark-800), transparent); }
     .marquee-track {
       display: flex;
       align-items: center;
       width: max-content;
-      animation: marquee-scroll 28s linear infinite;
+      animation: marquee-scroll 30s linear infinite;
     }
     .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marquee-scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
     .marquee-item {
       display: flex;
       align-items: center;
@@ -370,120 +665,463 @@
       flex-shrink: 0;
     }
     .marquee-item img {
-      max-height: 40px;
+      max-height: 36px;
       height: auto;
       width: auto;
       object-fit: contain;
-      transition: transform 0.25s, filter 0.25s;
-      filter: grayscale(0.15);
+      transition: var(--transition-fast);
+      filter: brightness(0) invert(1) opacity(0.4);
     }
-    .marquee-item img:hover { transform: scale(1.1); filter: grayscale(0); }
+    .marquee-item img:hover { filter: brightness(0) invert(1) opacity(0.9); transform: scale(1.1); }
 
-    /* SECCION INFO */
-    .info-section {
+    /* ============================================
+       WHY US / INFO SECTION
+       ============================================ */
+    .why-us-section {
+      padding: 100px 24px;
       max-width: 1200px;
-      margin: 50px auto;
-      padding: 0 24px;
+      margin: 0 auto;
+    }
+    .why-us-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 60px;
       align-items: center;
     }
-    @media (max-width: 700px) {
-      .info-section { grid-template-columns: 1fr; gap: 24px; margin: 32px auto; }
-    }
-    .info-visual {
-      background: linear-gradient(135deg, var(--dark) 0%, #16213e 50%, #0f3460 100%);
-      border-radius: 10px;
-      height: 300px;
+    .why-us-visual {
+      background: linear-gradient(135deg, var(--dark-700), var(--dark-600));
+      border-radius: var(--radius-xl);
+      height: 380px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
-      border: 2px solid rgba(38,198,218,0.3);
+      border: 1px solid rgba(0,212,255,0.1);
     }
-    .info-visual-inner { text-align: center; z-index: 1; }
-    .info-visual-circle {
-      width: 90px; height: 90px;
-      border-radius: 50%;
-      background: rgba(38,198,218,0.15);
-      border: 3px solid var(--cyan);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 16px;
-    }
-    .info-visual-circle svg { width: 44px; height: 44px; }
-    .info-visual-text { font-size: 1.3rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; }
-    .info-visual-sub { font-size: 0.78rem; color: var(--cyan); margin-top: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
-    .info-visual::before {
+    .why-us-visual::before {
       content: '';
       position: absolute;
-      width: 260px; height: 260px;
+      width: 300px; height: 300px;
       border-radius: 50%;
-      border: 1px solid rgba(38,198,218,0.12);
+      border: 1px solid rgba(0,212,255,0.08);
       top: 50%; left: 50%;
       transform: translate(-50%,-50%);
+      animation: spin-slow 40s linear infinite;
     }
-    .info-text .eyebrow {
-      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--cyan-dark); margin-bottom: 10px;
+    .why-us-visual::after {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,212,255,0.06);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      animation: spin-slow 25s linear infinite reverse;
     }
-    .info-text h2 {
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 900; color: var(--dark); line-height: 1.2; margin-bottom: 16px;
-    }
-    .info-text h2 span { color: var(--cyan-dark); }
-    .info-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
-    .btn-cyan {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--cyan); color: #fff;
-      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.8rem;
-      letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
-      padding: 12px 26px; border-radius: 50px;
-      transition: background 0.2s, transform 0.15s;
-      box-shadow: 0 4px 18px rgba(38,198,218,0.30);
-    }
-    .btn-cyan:hover { background: var(--cyan-dark); transform: translateY(-2px); }
-
-    /* FOOTER */
-    .site-footer {
-      background: var(--dark);
-      border-top: 3px solid var(--cyan);
-      padding: 36px 24px 28px;
+    .visual-inner {
       text-align: center;
+      z-index: 1;
     }
-    .footer-logo { margin-bottom: 16px; }
-    .footer-logo img { height: 38px; width: auto; filter: brightness(0) invert(1); opacity: 0.85; }
-    .footer-links {
-      display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;
+    .visual-circle {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(0,212,255,0.1);
+      border: 3px solid var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: var(--shadow-glow);
     }
-    .footer-links a {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none;
-      transition: color 0.2s;
+    .visual-circle svg { width: 48px; height: 48px; color: var(--cyan); }
+    .visual-text {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
-    .footer-links a:hover { color: var(--cyan); }
-    .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.28); letter-spacing: 0.04em; }
-    .footer-copy span { color: var(--cyan); font-weight: 700; }
+    .visual-sub {
+      font-size: 0.8rem;
+      color: var(--cyan);
+      margin-top: 6px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .why-us-text .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 14px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.15);
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+    }
+    .why-us-text h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .why-us-text h2 span { color: var(--cyan); }
+    .why-us-text p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .why-us-features {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .feature-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(0,212,255,0.1);
+      border: 1.5px solid var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .feature-check svg { width: 14px; height: 14px; color: var(--cyan); }
+
+    .btn-cyan {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gradient-cyan);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 14px 30px;
+      border-radius: var(--radius-full);
+      transition: var(--transition-spring);
+      box-shadow: 0 4px 20px rgba(0,212,255,0.25);
+    }
+    .btn-cyan:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,212,255,0.4); }
+
+    /* ============================================
+       TESTIMONIALS
+       ============================================ */
+    .testimonials-section {
+      padding: 80px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: var(--transition-spring);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,212,255,0.15);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .testimonial-stars {
+      color: #FBBF24;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gradient-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .testimonial-role {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ============================================
+       CTA SECTION
+       ============================================ */
+    .cta-section {
+      padding: 40px 24px 80px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .cta-card {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(8,145,178,0.05));
+      border: 1px solid rgba(0,212,255,0.12);
+      border-radius: var(--radius-xl);
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(ellipse at 30% 50%, rgba(0,212,255,0.05), transparent 50%);
+      pointer-events: none;
+    }
+    .cta-card h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .cta-card p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .site-footer {
+      background: var(--dark-800);
+      border-top: 1px solid rgba(0,212,255,0.08);
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 32px;
+    }
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-brand .footer-logo-text {
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .footer-brand .footer-logo-text span { color: var(--cyan); }
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .footer-social a {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-spring);
+      color: var(--text-secondary);
+    }
+    .footer-social a:hover {
+      background: rgba(0,212,255,0.15);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-3px);
+    }
+    .footer-social a svg { width: 16px; height: 16px; }
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 5px 0;
+      transition: var(--transition-fast);
+    }
+    .footer-col a:hover { color: var(--cyan); transform: translateX(4px); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .footer-bottom span { color: var(--cyan); font-weight: 700; }
+
+    /* ============================================
+       FLOATING WHATSAPP BUTTON
+       ============================================ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+    }
+    .whatsapp-float a {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--green-wa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: var(--transition-spring);
+      position: relative;
+    }
+    .whatsapp-float a:hover {
+      background: var(--green-wa-hover);
+      transform: scale(1.1) translateY(-4px);
+      box-shadow: 0 10px 32px rgba(37,211,102,0.5);
+    }
+    .whatsapp-float a svg { width: 28px; height: 28px; color: #fff; }
+    .whatsapp-float .wa-pulse {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 3px solid var(--green-wa);
+      animation: pulse-ring 2s ease-out infinite;
+    }
+    .whatsapp-float .wa-tooltip {
+      position: absolute;
+      right: 72px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      color: #333;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-fast);
+    }
+    .whatsapp-float a:hover + .wa-tooltip,
+    .whatsapp-float .wa-tooltip:hover { opacity: 0; }
+    .whatsapp-float:hover .wa-tooltip { opacity: 1; }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 1024px) {
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .why-us-grid { gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .site-header { padding: 0 20px; min-height: 70px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+      .btn-whatsapp .btn-label { display: none; }
+      .btn-whatsapp { padding: 10px 14px; }
+
+      .hero-card { height: 420px; }
+      .hc-content { padding: 28px 32px 16px; }
+      .hc-bottom { padding: 14px 32px 28px; }
+      .carousel-btn { width: 40px; height: 40px; font-size: 1.2rem; }
+
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-us-grid { grid-template-columns: 1fr; }
+      .why-us-visual { height: 260px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .cta-card { padding: 48px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-card { height: 360px; }
+      .hc-sub { display: none; }
+      .hc-badge { font-size: 0.6rem; padding: 4px 12px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-card { padding: 24px 12px; }
+      .stat-number { font-size: 1.8rem; }
+    }
   </style>
 </head>
 <body>
 
   <!-- TOP BAR -->
   <div class="top-bar">
-    &#128308; Atencion personalizada &nbsp;&middot;&nbsp; Servicio tecnico especializado &nbsp;&middot;&nbsp; Cotiza ahora por WhatsApp
+    &#128308; Atención personalizada &nbsp;&middot;&nbsp; Servicio técnico especializado &nbsp;&middot;&nbsp; Cotiza ahora por WhatsApp
   </div>
 
   <!-- HEADER -->
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <a href="#" aria-label="NXT COMPU - Inicio">
-      <img src="img/logo.png" alt="NXT COMPU Logo" style="max-height: 90px; width: auto;" />
+      <img src="img/logo.png" alt="NXT COMPU Logo" style="max-height: 70px; width: auto;" />
     </a>
     <div class="header-right">
-      <nav aria-label="Navegacion principal">
-        <ul class="nav-links">
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links" id="nav-links-desktop">
           <li><a href="#" class="active">Inicio</a></li>
           <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
@@ -491,163 +1129,354 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
         </svg>
-        Cotizar por WhatsApp
+        <span class="btn-label">Cotizar por WhatsApp</span>
       </a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <!-- HERO: 3 TARJETAS DE SERVICIOS -->
-  <main id="servicios">
-    <div class="carousel-wrapper">
-    <div class="hero-cards" role="region" aria-label="Nuestros servicios">
-      <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Anterior">&#8249;</button>
-      <div class="carousel-track" id="carouselTrack">
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#" onclick="closeMobileNav()">Inicio</a>
+    <a href="#servicios" onclick="closeMobileNav()">Servicios</a>
+    <a href="#nosotros" onclick="closeMobileNav()">Nosotros</a>
+    <a href="#contacto" onclick="closeMobileNav()">Contacto</a>
+    <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20más%20información%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" class="btn-whatsapp" style="margin-top: 16px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
 
-      <!-- Tarjeta 1: Camaras -->
-      <a href="camaras.html" class="hero-card hc-1" aria-label="Ver paquetes de camaras de seguridad">
-        <div class="hc-bg"></div>
-        <div class="hc-overlay"></div>
-        <div class="hc-content">
-          <div class="hc-badge">Seguridad</div>
-          <h2 class="hc-title">Instalacion de<br>Camaras de Seguridad<br>Hikvision</h2>
+  <main>
+    <!-- HERO CAROUSEL -->
+    <section class="carousel-section" id="servicios">
+      <div class="carousel-wrapper reveal">
+        <div class="hero-cards">
+          <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Anterior">&#8249;</button>
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Card 1: Cámaras -->
+            <a href="camaras.html" class="hero-card hc-1" aria-label="Ver paquetes de cámaras de seguridad">
+              <div class="hc-bg"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-content">
+                <div class="hc-badge">🛡️ Seguridad</div>
+                <h2 class="hc-title">Instalación de<br>Cámaras de Seguridad<br>Hikvision</h2>
+              </div>
+              <div class="hc-bottom">
+                <p class="hc-sub">Protege tu hogar o negocio con sistemas CCTV profesionales de alta resolución 4K o 2K. Instalación incluida.</p>
+                <span class="hc-cta">
+                  Ver Paquetes
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+              </div>
+            </a>
+            <!-- Card 2: Servicio técnico -->
+            <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20más%20información%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" class="hero-card hc-2" aria-label="Cotizar servicio técnico de laptops">
+              <div class="hc-bg"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-content">
+                <div class="hc-badge">🔧 Técnico</div>
+                <h2 class="hc-title">Servicio Técnico<br>de Laptops y Repuestos</h2>
+              </div>
+              <div class="hc-bottom">
+                <p class="hc-sub">Diagnóstico de motherboards · Programación de BIOS · Recuperación de datos · Cambio de pantallas y baterías</p>
+                <span class="hc-cta">
+                  Cotizar ahora
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+              </div>
+            </a>
+            <!-- Card 3: Ventas -->
+            <a href="catalogo_laptops_accesorios.html" class="hero-card hc-3" aria-label="Ver catálogo de laptops y accesorios">
+              <div class="hc-bg"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-content">
+                <div class="hc-badge">💻 Ventas</div>
+                <h2 class="hc-title">Venta de Laptops<br>y Accesorios</h2>
+              </div>
+              <div class="hc-bottom">
+                <p class="hc-sub">Importación directa · Laptops · Computadoras de escritorio · Mouse · UPS · Reguladores · Los mejores precios</p>
+                <span class="hc-cta">
+                  Ver Catálogo
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+              </div>
+            </a>
+          </div>
+          <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Siguiente">&#8250;</button>
         </div>
-        <div class="hc-bottom">
-          <p class="hc-sub">Protege tu hogar o negocio con sistemas CCTV profesionales de alta resolucion 4K o 2k</p>
-          <span class="hc-cta">
-            Ver Paquetes
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
+        <div class="carousel-dots" id="carouselDots">
+          <button class="carousel-dot active" data-index="0" aria-label="Slide 1"></button>
+          <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+          <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
         </div>
-      </a>
+      </div>
+    </section>
 
-      <!-- Tarjeta 2: Servicio tecnico -->
-      <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" class="hero-card hc-2" aria-label="Cotizar servicio tecnico de laptops">
-        <div class="hc-bg"></div>
-        <div class="hc-overlay"></div>
-        <div class="hc-content">
-          <div class="hc-badge">Tecnico</div>
-          <h2 class="hc-title">Servicio Tecnico<br>de Laptops y repuestos</h2>
+    <!-- STATS -->
+    <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <span class="stat-icon">⚡</span>
+          <div><span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span></div>
+          <div class="stat-label">Años de Experiencia</div>
         </div>
-        <div class="hc-bottom">
-          <p class="hc-sub">Diagnostico de motherboards &middot; Programacion de BIOS &middot; Recuperacion de datos &middot; Cambio de pantallas y baterias</p>
-          <span class="hc-cta">
-            Cotizar ahora
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
+        <div class="stat-card reveal reveal-delay-1">
+          <span class="stat-icon">👥</span>
+          <div><span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span></div>
+          <div class="stat-label">Clientes Satisfechos</div>
         </div>
-      </a>
+        <div class="stat-card reveal reveal-delay-2">
+          <span class="stat-icon">🔧</span>
+          <div><span class="stat-number" data-target="1000">0</span><span class="stat-suffix">+</span></div>
+          <div class="stat-label">Reparaciones</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+          <span class="stat-icon">📹</span>
+          <div><span class="stat-number" data-target="200">0</span><span class="stat-suffix">+</span></div>
+          <div class="stat-label">Cámaras Instaladas</div>
+        </div>
+      </div>
+    </section>
 
-      <!-- Tarjeta 3: Ventas -->
-      <a href="catalogo_laptops_accesorios.html" class="hero-card hc-3" aria-label="Ver catalogo de laptops y accesorios">
-        <div class="hc-bg"></div>
-        <div class="hc-overlay"></div>
-        <div class="hc-content">
-          <div class="hc-badge">Ventas</div>
-          <h2 class="hc-title">Venta de Laptops<br>y accesorios</h2>
-        </div>
-        <div class="hc-bottom">
-          <p class="hc-sub">Importacion directa &middot; Laptops &middot; Computadoras de escritorio  &middot; Mouse &middot; ups reguladores &middot; Los mejores precios del mercado</p>
-          <span class="hc-cta">
-            Ver Cat&aacute;logo
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </div>
-      </a>
+    <!-- SERVICES -->
+    <section class="services-section">
+      <div class="section-header reveal">
+        <div class="section-badge">⚙️ Nuestros Servicios</div>
+        <h2 class="section-title">Soluciones <span class="text-gradient">Tecnológicas</span> Completas</h2>
+        <p class="section-subtitle">Todo lo que necesitas en un solo lugar. Calidad, confianza y precios competitivos.</p>
+      </div>
+      <div class="services-grid">
+        <a href="camaras.html" class="service-card reveal">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.2 8.4 3.6-3.6a1 1 0 0 1 1.6.4l1.4 4.2a1 1 0 0 1-.2 1l-3.6 3.6"/><path d="M8.4 15.2 4.8 18.8a1 1 0 0 1-1-.2l-1.6-4.2a1 1 0 0 1 .2-1l3.6-3.6"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.5-1.5"/><path d="m8 8-1.5-1.5"/></svg>
+          </div>
+          <h3>Cámaras de Seguridad</h3>
+          <p>Sistemas CCTV Hikvision y Ezviz. Instalación profesional con monitoreo 24/7 desde tu celular.</p>
+          <span class="service-link">Ver catálogo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+        <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Necesito%20servicio%20t%C3%A9cnico." target="_blank" class="service-card reveal reveal-delay-1">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Servicio Técnico</h3>
+          <p>Reparación de laptops, diagnóstico de motherboards, programación de BIOS y recuperación de datos.</p>
+          <span class="service-link">Cotizar ahora <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+        <a href="catalogo_laptops_accesorios.html" class="service-card reveal reveal-delay-2">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          </div>
+          <h3>Venta de Equipos</h3>
+          <p>Laptops, computadoras de escritorio, accesorios, mouse, teclados, UPS y más. Importación directa.</p>
+          <span class="service-link">Ver productos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </section>
 
-      </div><!-- /carousel-track -->
-      <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Siguiente">&#8250;</button>
-    </div>
-    <!-- DOTS INDICADORES -->
-    <div class="carousel-dots" id="carouselDots">
-      <button class="carousel-dot active" data-index="0" aria-label="Slide 1"></button>
-      <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
-      <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
-    </div>
-    </div><!-- /carousel-wrapper -->
-
-    <!-- FRANJA DE MARCAS: MARQUEE INFINITO -->
+    <!-- BRANDS MARQUEE -->
     <div class="brands-section" role="region" aria-label="Marcas con las que trabajamos">
-      <p class="brands-label">Marcas con las que trabajamos</p>
-      <p class="brands-sublabel">Distribuidor autorizado de las mejores marcas tecnol&oacute;gicas</p>
+      <p class="brands-label reveal">Marcas con las que trabajamos</p>
+      <p class="brands-sublabel reveal">Distribuidor autorizado de las mejores marcas tecnológicas</p>
       <div class="brands-divider"></div>
       <div class="marquee-wrapper">
         <div class="marquee-track">
-          <!-- Set 1 -->
-          <div class="marquee-item"><img src="img/marcas/Acer.png"      alt="Acer"      /></div>
-          <div class="marquee-item"><img src="img/marcas/Dell.png"      alt="Dell"      /></div>
-          <div class="marquee-item"><img src="img/marcas/Epson.png"     alt="Epson"     /></div>
+          <div class="marquee-item"><img src="img/marcas/Acer.png" alt="Acer" /></div>
+          <div class="marquee-item"><img src="img/marcas/Dell.png" alt="Dell" /></div>
+          <div class="marquee-item"><img src="img/marcas/Epson.png" alt="Epson" /></div>
           <div class="marquee-item"><img src="img/marcas/Hikvision.png" alt="Hikvision" /></div>
-          <div class="marquee-item"><img src="img/marcas/HP.png"        alt="HP"        /></div>
-          <div class="marquee-item"><img src="img/marcas/lenovo.png"    alt="Lenovo"    /></div>
-          <div class="marquee-item"><img src="img/marcas/msi.png"       alt="MSI"       /></div>
-          <div class="marquee-item"><img src="img/marcas/Samsung.png"   alt="Samsung"   /></div>
-          <!-- Set 2 (copia para bucle sin cortes) -->
-          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Acer.png"      alt="" /></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Dell.png"      alt="" /></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Epson.png"     alt="" /></div>
+          <div class="marquee-item"><img src="img/marcas/HP.png" alt="HP" /></div>
+          <div class="marquee-item"><img src="img/marcas/lenovo.png" alt="Lenovo" /></div>
+          <div class="marquee-item"><img src="img/marcas/msi.png" alt="MSI" /></div>
+          <div class="marquee-item"><img src="img/marcas/Samsung.png" alt="Samsung" /></div>
+          <!-- Duplicate for seamless loop -->
+          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Acer.png" alt="" /></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Dell.png" alt="" /></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Epson.png" alt="" /></div>
           <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Hikvision.png" alt="" /></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/HP.png"        alt="" /></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/lenovo.png"    alt="" /></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/msi.png"       alt="" /></div>
-          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Samsung.png"   alt="" /></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/HP.png" alt="" /></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/lenovo.png" alt="" /></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/msi.png" alt="" /></div>
+          <div class="marquee-item" aria-hidden="true"><img src="img/marcas/Samsung.png" alt="" /></div>
         </div>
       </div>
     </div>
 
-    <!-- SECCION INFO + CTA -->
-    <div class="info-section" id="contacto">
-      <div class="info-visual" role="img" aria-label="NXT COMPU tecnologia">
-        <div class="info-visual-inner">
-          <div class="info-visual-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#26C6DA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/>
-            </svg>
+    <!-- WHY US -->
+    <section class="why-us-section" id="nosotros">
+      <div class="why-us-grid">
+        <div class="why-us-visual reveal" role="img" aria-label="NXT COMPU tecnología">
+          <div class="visual-inner">
+            <div class="visual-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/>
+              </svg>
+            </div>
+            <div class="visual-text">NXT COMPU</div>
+            <div class="visual-sub">Tecnología al siguiente nivel</div>
           </div>
-          <div class="info-visual-text">NXT COMPU</div>
-          <div class="info-visual-sub">Tecnologia al siguiente nivel</div>
+        </div>
+        <div class="why-us-text reveal reveal-delay-1">
+          <div class="eyebrow">¿Por qué elegirnos?</div>
+          <h2>Expertos en <span>tecnología</span> que resuelven tu problema hoy</h2>
+          <p>En NXT COMPU, con más de 10 años de experiencia, combinamos técnica real con precios competitivos. Ya sea que necesites instalar un sistema de vigilancia, reparar tu laptop o conseguir el repuesto exacto, somos tu aliado tecnológico de confianza.</p>
+          <div class="why-us-features">
+            <div class="feature-item">
+              <span class="feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Diagnóstico gratuito en servicio técnico
+            </div>
+            <div class="feature-item">
+              <span class="feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Garantía en todas las reparaciones
+            </div>
+            <div class="feature-item">
+              <span class="feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Importación directa — Mejores precios
+            </div>
+            <div class="feature-item">
+              <span class="feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+              Atención personalizada por WhatsApp
+            </div>
+          </div>
+          <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20más%20información%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" class="btn-cyan">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Escríbenos por WhatsApp
+          </a>
         </div>
       </div>
-      <div class="info-text">
-        <p class="eyebrow">Por que elegirnos?</p>
-        <h2>Expertos en <span>tecnologia</span> que resuelven tu problema hoy</h2>
-        <p>En NXT COMPU con mas de 10 años en experiencia combinamos tecnica real con precios competitivos. Ya sea que necesites instalar un sistema de vigilancia, reparar tu laptop o conseguir el repuesto exacto, somos tu aliado tecnologico de confianza.</p>
-        <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" class="btn-cyan">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-          </svg>
-          Escribenos por WhatsApp
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section" id="contacto">
+      <div class="section-header reveal">
+        <div class="section-badge">💬 Testimonios</div>
+        <h2 class="section-title">Lo que dicen nuestros <span class="text-gradient">clientes</span></h2>
+        <p class="section-subtitle">La confianza de quienes ya eligieron NXT COMPU</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Instalaron 4 cámaras Hikvision en mi negocio y quedó impecable. La calidad de imagen es excelente y puedo ver todo desde mi celular. 100% recomendados."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MC</div>
+            <div>
+              <div class="testimonial-name">María C.</div>
+              <div class="testimonial-role">Propietaria de tienda</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Mi laptop no prendía y pensé que estaba perdida. En NXT COMPU la repararon el mismo día. El diagnóstico fue gratuito y el precio super justo."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JR</div>
+            <div>
+              <div class="testimonial-name">Juan R.</div>
+              <div class="testimonial-role">Estudiante universitario</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Compré una laptop HP y accesorios. Los precios son mucho mejores que en otras tiendas y la atención por WhatsApp es rapidísima. ¡Gran servicio!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">LP</div>
+            <div>
+              <div class="testimonial-name">Laura P.</div>
+              <div class="testimonial-role">Emprendedora</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-card reveal">
+        <h2>¿Necesitas ayuda <span class="text-gradient">tecnológica</span>?</h2>
+        <p>Cotiza gratis por WhatsApp y recibe atención personalizada al instante. ¡Estamos listos para ayudarte!</p>
+        <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20más%20información%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" class="btn-cyan" style="position:relative;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Cotizar Gratis por WhatsApp
         </a>
       </div>
-    </div>
-
+    </section>
   </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-logo">
-      <img src="img/logo.png" alt="NXT COMPU" />
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <div class="footer-logo-text"><span>NXT</span> COMPU</div>
+          <p>Tu aliado tecnológico de confianza. Más de 10 años brindando soluciones tecnológicas en Jipijapa y todo Ecuador.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <a href="#">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <a href="camaras.html">Cámaras CCTV</a>
+          <a href="catalogo_laptops_accesorios.html">Laptops y Accesorios</a>
+          <a href="https://wa.me/593994702091" target="_blank">Servicio Técnico</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <a href="https://wa.me/593994702091" target="_blank">📱 +593 99 470 2091</a>
+          <a href="#">📍 Jipijapa, Manabí</a>
+          <a href="#">🕐 Lun - Sáb: 9am - 6pm</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span>NXT COMPU</span> — Todos los derechos reservados.</p>
+        <p>📍 Jipijapa, Manabí, Ecuador 🇪🇨</p>
+      </div>
     </div>
-    <nav class="footer-links" aria-label="Links del pie">
-      <a href="#">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <p class="footer-copy">&copy; 2026 <span>NXT COMPU</span> &mdash; Todos los derechos reservados.</p>
   </footer>
 
+  <!-- FLOATING WHATSAPP -->
+  <div class="whatsapp-float" id="whatsapp-float">
+    <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Deseo%20más%20información%20sobre%20sus%20servicios%20y%20productos." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+      <span class="wa-pulse"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+    </a>
+    <div class="wa-tooltip">💬 ¿Necesitas ayuda? ¡Escríbenos!</div>
+  </div>
+
   <script>
+    // ============================================
+    // CAROUSEL
+    // ============================================
     (function () {
-      var track  = document.getElementById('carouselTrack');
+      var track = document.getElementById('carouselTrack');
       var btnPrev = document.getElementById('carouselPrev');
       var btnNext = document.getElementById('carouselNext');
-      var dots    = document.querySelectorAll('.carousel-dot');
-      var cards   = track.querySelectorAll('.hero-card');
-      var total   = cards.length;
+      var dots = document.querySelectorAll('.carousel-dot');
+      var cards = track.querySelectorAll('.hero-card');
+      var total = cards.length;
       var current = 0;
+      var autoplayInterval;
 
-      function slideWidth() {
-        return track.clientWidth;
-      }
+      function slideWidth() { return track.clientWidth; }
 
       function goTo(index) {
         if (index < 0) index = total - 1;
@@ -655,23 +1484,113 @@
         current = index;
         track.scrollTo({ left: slideWidth() * current, behavior: 'smooth' });
         dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+        cards.forEach(function(c, i) { c.classList.toggle('active', i === current); });
       }
 
-      btnNext.addEventListener('click', function () { goTo(current + 1); });
-      btnPrev.addEventListener('click', function () { goTo(current - 1); });
-
+      btnNext.addEventListener('click', function() { goTo(current + 1); resetAutoplay(); });
+      btnPrev.addEventListener('click', function() { goTo(current - 1); resetAutoplay(); });
       dots.forEach(function(dot) {
-        dot.addEventListener('click', function () { goTo(parseInt(dot.dataset.index)); });
+        dot.addEventListener('click', function() { goTo(parseInt(dot.dataset.index)); resetAutoplay(); });
       });
 
-      // Sync dots on manual scroll
-      track.addEventListener('scroll', function () {
+      track.addEventListener('scroll', function() {
         var idx = Math.round(track.scrollLeft / slideWidth());
         if (idx !== current) {
           current = idx;
           dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+          cards.forEach(function(c, i) { c.classList.toggle('active', i === current); });
         }
       });
+
+      // Autoplay
+      function startAutoplay() {
+        autoplayInterval = setInterval(function() { goTo(current + 1); }, 5000);
+      }
+      function resetAutoplay() {
+        clearInterval(autoplayInterval);
+        startAutoplay();
+      }
+      startAutoplay();
+      cards[0].classList.add('active');
+
+      // Pause on hover
+      var wrapper = document.querySelector('.carousel-wrapper');
+      wrapper.addEventListener('mouseenter', function() { clearInterval(autoplayInterval); });
+      wrapper.addEventListener('mouseleave', startAutoplay);
+    })();
+
+    // ============================================
+    // NAVBAR SCROLL
+    // ============================================
+    (function() {
+      var header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+    })();
+
+    // ============================================
+    // HAMBURGER MENU
+    // ============================================
+    var hamburger = document.getElementById('hamburger');
+    var mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+
+    function closeMobileNav() {
+      hamburger.classList.remove('active');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ============================================
+    // SCROLL REVEAL
+    // ============================================
+    (function() {
+      var reveals = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ============================================
+    // STAT COUNTERS
+    // ============================================
+    (function() {
+      var stats = document.querySelectorAll('.stat-number[data-target]');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      stats.forEach(function(stat) { observer.observe(stat); });
+
+      function animateCounter(el) {
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var duration = 2000;
+        var start = performance.now();
+        function update(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
     })();
   </script>
 
