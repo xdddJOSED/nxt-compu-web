@@ -43,6 +43,11 @@
     ul{list-style:none}
     ::selection{background:rgba(14,165,233,0.15)}
 
+    /* ─── PARTICLE CANVAS ─── */
+    #particle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .site-header{z-index:200;position:relative}
+    main,.site-footer,.wa-float,.mobile-nav{position:relative;z-index:1}
+
     .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94)}
     .reveal.visible{opacity:1;transform:translateY(0)}
     .reveal-delay-1{transition-delay:.12s}.reveal-delay-2{transition-delay:.24s}.reveal-delay-3{transition-delay:.36s}
@@ -262,6 +267,8 @@
 </head>
 <body>
 
+  <canvas id="particle-canvas"></canvas>
+
   <header class="site-header" id="site-header">
     <a href="#" class="header-logo"><img src="img/logo.png" alt="NXT COMPU" /></a>
     <div class="header-right">
@@ -431,6 +438,125 @@
     var hb=document.getElementById('hamburger'),mn=document.getElementById('mobile-nav');hb.addEventListener('click',function(){hb.classList.toggle('active');mn.classList.toggle('open');document.body.style.overflow=mn.classList.contains('open')?'hidden':''});function closeMobileNav(){hb.classList.remove('active');mn.classList.remove('open');document.body.style.overflow=''}
     (function(){var e=document.querySelectorAll('.reveal');var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');o.unobserve(en.target)}})},{threshold:.1,rootMargin:'0px 0px -20px 0px'});e.forEach(function(el){o.observe(el)})})();
     (function(){var s=document.querySelectorAll('.stat-number[data-target]');var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){an(en.target);o.unobserve(en.target)}})},{threshold:.5});s.forEach(function(x){o.observe(x)});function an(el){var tg=+el.dataset.target,du=2e3,st=performance.now();(function u(n){var p=Math.min((n-st)/du,1);el.textContent=Math.round((1-Math.pow(1-p,3))*tg);if(p<1)requestAnimationFrame(u)})(st)}})();
+    /* ── PARTICLE NETWORK BACKGROUND ── */
+    (function(){
+      var c=document.getElementById('particle-canvas'),
+          ctx=c.getContext('2d'),
+          W,H,particles=[],
+          PARTICLE_COUNT=80,
+          CONNECT_DIST=150,
+          MOUSE_RADIUS=180,
+          scrollY=0,
+          mouseX=-999,mouseY=-999;
+
+      function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+      window.addEventListener('resize',resize);resize();
+
+      // Detect low-power devices
+      var isMobile=window.innerWidth<768;
+      if(isMobile){PARTICLE_COUNT=40;CONNECT_DIST=120}
+
+      function Particle(){
+        this.x=Math.random()*W;
+        this.y=Math.random()*H*2.5;// spread across scroll height
+        this.origY=this.y;
+        this.vx=(Math.random()-0.5)*0.35;
+        this.vy=(Math.random()-0.5)*0.25;
+        this.r=Math.random()*2.2+1;
+        this.opacity=Math.random()*0.5+0.15;
+        this.pulse=Math.random()*Math.PI*2;
+        this.pulseSpeed=Math.random()*0.015+0.005;
+      }
+
+      for(var i=0;i<PARTICLE_COUNT;i++)particles.push(new Particle());
+
+      function draw(){
+        ctx.clearRect(0,0,W,H);
+        var sY=window.pageYOffset||0;
+        var maxScroll=document.documentElement.scrollHeight-H;
+        var scrollRatio=maxScroll>0?sY/maxScroll:0;
+
+        // Draw connections first
+        for(var i=0;i<particles.length;i++){
+          var p=particles[i];
+          // Parallax offset — each particle moves at different speed
+          var py=p.y-sY*0.35*(0.3+p.r/3);
+          p._drawX=p.x;
+          p._drawY=py;
+
+          for(var j=i+1;j<particles.length;j++){
+            var q=particles[j];
+            var qy=q.y-sY*0.35*(0.3+q.r/3);
+            var dx=p.x-q.x,dy=py-qy;
+            var dist=Math.sqrt(dx*dx+dy*dy);
+            if(dist<CONNECT_DIST){
+              var alpha=(1-dist/CONNECT_DIST)*0.18;
+              ctx.beginPath();
+              ctx.moveTo(p.x,py);
+              ctx.lineTo(q.x,qy);
+              ctx.strokeStyle='rgba(14,165,233,'+alpha+')';
+              ctx.lineWidth=0.6;
+              ctx.stroke();
+            }
+          }
+
+          // Mouse interaction lines
+          var mdx=p.x-mouseX,mdy=py-mouseY;
+          var mDist=Math.sqrt(mdx*mdx+mdy*mdy);
+          if(mDist<MOUSE_RADIUS){
+            var mAlpha=(1-mDist/MOUSE_RADIUS)*0.3;
+            ctx.beginPath();
+            ctx.moveTo(p.x,py);
+            ctx.lineTo(mouseX,mouseY);
+            ctx.strokeStyle='rgba(14,165,233,'+mAlpha+')';
+            ctx.lineWidth=0.8;
+            ctx.stroke();
+          }
+        }
+
+        // Draw particles
+        for(var i=0;i<particles.length;i++){
+          var p=particles[i];
+          p.pulse+=p.pulseSpeed;
+          var pulseFactor=0.6+Math.sin(p.pulse)*0.4;
+          var py=p._drawY;
+
+          // Glow
+          var grd=ctx.createRadialGradient(p.x,py,0,p.x,py,p.r*4);
+          grd.addColorStop(0,'rgba(14,165,233,'+(p.opacity*pulseFactor*0.5)+')');
+          grd.addColorStop(1,'rgba(14,165,233,0)');
+          ctx.beginPath();
+          ctx.arc(p.x,py,p.r*4,0,Math.PI*2);
+          ctx.fillStyle=grd;
+          ctx.fill();
+
+          // Core dot
+          ctx.beginPath();
+          ctx.arc(p.x,py,p.r*pulseFactor,0,Math.PI*2);
+          ctx.fillStyle='rgba(14,165,233,'+(p.opacity*pulseFactor+0.1)+')';
+          ctx.fill();
+
+          // Move
+          p.x+=p.vx;
+          p.y+=p.vy;
+
+          // Bounce at edges (horizontal)
+          if(p.x<-20)p.x=W+20;
+          if(p.x>W+20)p.x=-20;
+          // Vertical wrap
+          var totalH=H*2.5;
+          if(p.y<-20)p.y=totalH+20;
+          if(p.y>totalH+20)p.y=-20;
+        }
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      // Track mouse for interactive connections
+      document.addEventListener('mousemove',function(e){mouseX=e.clientX;mouseY=e.clientY});
+      document.addEventListener('mouseleave',function(){mouseX=-999;mouseY=-999});
+    })();
   </script>
 </body>
 </html>
