@@ -53,12 +53,13 @@
     /* ─── HEADER ─── */
     .site-header{
       position:fixed;top:0;left:0;right:0;z-index:200;
-      padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
-      background:rgba(255,255,255,0.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+      padding:0 40px;height:80px;display:flex;align-items:center;justify-content:space-between;
+      background:rgba(255,255,255,0.82);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
       border-bottom:1px solid var(--border);transition:.3s ease;
     }
-    .site-header.scrolled{background:rgba(255,255,255,0.92);box-shadow:0 1px 16px rgba(0,0,0,0.06)}
-    .header-logo img{height:48px;width:auto}
+    .site-header.scrolled{background:rgba(255,255,255,0.95);box-shadow:0 1px 16px rgba(0,0,0,0.06)}
+    .header-logo img{height:64px;width:auto;transition:.3s ease}
+    .site-header.scrolled .header-logo img{height:52px}
     .header-right{display:flex;align-items:center;gap:8px}
     .nav-links{display:flex;gap:2px}
     .nav-links a{font-size:.82rem;font-weight:500;color:var(--text-secondary);padding:8px 16px;border-radius:var(--radius-full);transition:.25s ease}
@@ -87,33 +88,31 @@
     .mobile-nav a:hover{color:var(--accent)}
 
     /* ─── HERO CAROUSEL ─── */
-    .carousel-section{padding:88px 20px 24px;max-width:1320px;margin:0 auto}
-    .carousel-wrapper{border-radius:var(--radius-xl);overflow:hidden;position:relative;box-shadow:0 2px 40px rgba(0,0,0,0.08);border:1px solid var(--border)}
+    .carousel-section{padding:104px 24px 24px;max-width:1200px;margin:0 auto}
+    .carousel-wrapper{border-radius:var(--radius-lg);overflow:hidden;position:relative;box-shadow:0 2px 32px rgba(0,0,0,0.07);border:1px solid var(--border)}
     .hero-cards{position:relative;width:100%;overflow:hidden}
     .carousel-track{display:flex;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none}
     .carousel-track::-webkit-scrollbar{display:none}
-    .hero-card{position:relative;display:block;overflow:hidden;height:520px;flex:0 0 100%;width:100%;scroll-snap-align:start}
-    .hero-card .hc-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 10s ease}
-    .hero-card.active .hc-bg{transform:scale(1.06)}
-    .hc-1 .hc-bg{background-image:url('img/catalogos/camaras_seguridad.jpeg')}
-    .hc-2 .hc-bg{background-image:url('img/catalogos/reparacion_laptops.jpeg')}
-    .hc-3 .hc-bg{background-image:url('img/catalogos/laptops_accesorios.jpeg')}
-    .hero-card .hc-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.08) 35%,rgba(0,0,0,0.75) 100%)}
-    .hc-content{position:absolute;top:0;left:0;right:0;padding:48px 56px 20px;z-index:2}
-    .hc-badge{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;padding:5px 14px;border-radius:var(--radius-full);background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);margin-bottom:20px}
-    .hc-title{font-size:clamp(1.6rem,4vw,3.2rem);font-weight:800;color:#fff;line-height:1.08;letter-spacing:-.02em;max-width:600px}
-    .hc-bottom{position:absolute;bottom:0;left:0;right:0;padding:20px 56px 40px;z-index:2}
-    .hc-sub{font-size:.92rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:24px;max-width:500px;font-weight:400}
-    .hc-cta{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#000;font-size:.82rem;font-weight:700;padding:14px 28px;border-radius:var(--radius-full);transition:.4s cubic-bezier(.34,1.56,.64,1)}
+    .hero-card{position:relative;display:block;overflow:hidden;height:clamp(280px, 42vh, 420px);flex:0 0 100%;width:100%;scroll-snap-align:start}
+    .hero-card .hc-bg{position:absolute;inset:0;transition:transform 10s ease}
+    .hero-card .hc-bg img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+    .hero-card.active .hc-bg{transform:scale(1.04)}
+    .hero-card .hc-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.05) 30%,rgba(0,0,0,0.7) 100%);z-index:1}
+    .hc-content{position:absolute;top:0;left:0;right:0;padding:32px 44px 16px;z-index:2}
+    .hc-badge{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;padding:4px 12px;border-radius:var(--radius-full);background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);margin-bottom:14px}
+    .hc-title{font-size:clamp(1.3rem,3.5vw,2.4rem);font-weight:800;color:#fff;line-height:1.1;letter-spacing:-.02em;max-width:520px;text-shadow:0 2px 12px rgba(0,0,0,0.3)}
+    .hc-bottom{position:absolute;bottom:0;left:0;right:0;padding:16px 44px 28px;z-index:2}
+    .hc-sub{font-size:.85rem;color:rgba(255,255,255,0.8);line-height:1.5;margin-bottom:18px;max-width:460px;font-weight:400}
+    .hc-cta{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#000;font-size:.78rem;font-weight:700;padding:12px 24px;border-radius:var(--radius-full);transition:.4s cubic-bezier(.34,1.56,.64,1)}
     .hero-card:hover .hc-cta{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15);gap:12px}
-    .hc-cta svg{width:14px;height:14px;transition:transform .3s}
+    .hc-cta svg{width:13px;height:13px;transition:transform .3s}
     .hero-card:hover .hc-cta svg{transform:translateX(2px)}
-    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.2);backdrop-filter:blur(12px);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:50%;width:46px;height:46px;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s ease}
-    .carousel-btn:hover{background:rgba(255,255,255,0.35);transform:translateY(-50%) scale(1.08)}
-    .carousel-btn-prev{left:16px}.carousel-btn-next{right:16px}
-    .carousel-dots{display:flex;justify-content:center;gap:8px;padding:16px 0;background:var(--bg-page)}
-    .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:.3s ease}
-    .carousel-dot.active{background:var(--accent);width:24px;border-radius:4px}
+    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.25);backdrop-filter:blur(12px);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:50%;width:40px;height:40px;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s ease}
+    .carousel-btn:hover{background:rgba(255,255,255,0.4);transform:translateY(-50%) scale(1.08)}
+    .carousel-btn-prev{left:12px}.carousel-btn-next{right:12px}
+    .carousel-dots{display:flex;justify-content:center;gap:8px;padding:14px 0;background:var(--bg-page)}
+    .carousel-dot{width:7px;height:7px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:.3s ease}
+    .carousel-dot.active{background:var(--accent);width:22px;border-radius:4px}
 
     /* ─── STATS ─── */
     .stats-section{padding:64px 20px;max-width:960px;margin:0 auto}
@@ -233,11 +232,17 @@
     /* ─── RESPONSIVE ─── */
     @media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr}.why-grid{gap:40px}}
     @media(max-width:768px){
-      .site-header{padding:0 16px;height:56px}.header-logo img{height:38px}
+      .site-header{padding:0 16px;height:64px}.header-logo img{height:48px}
+      .site-header.scrolled .header-logo img{height:42px}
       .nav-links{display:none}.hamburger{display:flex}.mobile-nav{display:flex}
       .btn-header-cta span{display:none}.btn-header-cta{padding:8px 12px}
-      .hero-card{height:400px}.hc-content{padding:32px 28px 16px}.hc-bottom{padding:16px 28px 28px}
-      .carousel-btn{width:38px;height:38px;font-size:1.1rem}
+      .carousel-section{padding:84px 16px 20px}
+      .hero-card{height:clamp(220px,35vh,320px)}
+      .hc-content{padding:24px 24px 12px}.hc-bottom{padding:12px 24px 22px}
+      .hc-title{font-size:clamp(1.1rem,3vw,1.6rem)}
+      .hc-sub{font-size:.78rem;margin-bottom:12px}
+      .hc-cta{padding:10px 18px;font-size:.72rem}
+      .carousel-btn{width:34px;height:34px;font-size:1rem}
       .stats-grid{grid-template-columns:repeat(2,1fr)}
       .services-grid{grid-template-columns:1fr}
       .why-grid{grid-template-columns:1fr}.why-visual{height:260px}
@@ -246,7 +251,13 @@
       .footer-bottom{flex-direction:column;gap:8px;text-align:center}
       .cta-card{padding:48px 24px}
     }
-    @media(max-width:480px){.hero-card{height:340px}.hc-sub{display:none}.stats-grid{grid-template-columns:1fr 1fr;gap:12px}.stat-card{padding:24px 10px}.stat-number{font-size:1.8rem}}
+    @media(max-width:480px){
+      .site-header{height:60px}.header-logo img{height:44px}
+      .hero-card{height:clamp(200px,30vh,260px)}
+      .hc-sub{display:none}.hc-badge{font-size:.55rem;padding:3px 10px;margin-bottom:10px}
+      .hc-content{padding:18px 20px 10px}.hc-bottom{padding:10px 20px 18px}
+      .stats-grid{grid-template-columns:1fr 1fr;gap:12px}.stat-card{padding:24px 10px}.stat-number{font-size:1.8rem}
+    }
   </style>
 </head>
 <body>
@@ -282,9 +293,24 @@
         <div class="hero-cards">
           <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Anterior">&#8249;</button>
           <div class="carousel-track" id="carouselTrack">
-            <a href="camaras.html" class="hero-card hc-1"><div class="hc-bg"></div><div class="hc-overlay"></div><div class="hc-content"><div class="hc-badge">Seguridad</div><h2 class="hc-title">Cámaras de<br>Seguridad Hikvision</h2></div><div class="hc-bottom"><p class="hc-sub">Protege tu hogar o negocio con sistemas CCTV profesionales de alta resolución 4K. Instalación incluida.</p><span class="hc-cta">Ver Paquetes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
-            <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Necesito%20servicio%20técnico." target="_blank" class="hero-card hc-2"><div class="hc-bg"></div><div class="hc-overlay"></div><div class="hc-content"><div class="hc-badge">Servicio Técnico</div><h2 class="hc-title">Reparación de<br>Laptops y Equipos</h2></div><div class="hc-bottom"><p class="hc-sub">Diagnóstico de motherboards · Programación de BIOS · Recuperación de datos · Cambio de pantallas</p><span class="hc-cta">Cotizar ahora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
-            <a href="catalogo_laptops_accesorios.html" class="hero-card hc-3"><div class="hc-bg"></div><div class="hc-overlay"></div><div class="hc-content"><div class="hc-badge">Catálogo</div><h2 class="hc-title">Laptops, Equipos<br>y Accesorios</h2></div><div class="hc-bottom"><p class="hc-sub">Importación directa · Los mejores precios del mercado · Laptops, mouse, UPS, teclados y más</p><span class="hc-cta">Ver Catálogo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
+            <a href="camaras.html" class="hero-card">
+              <div class="hc-bg"><img src="img/catalogos/camaras_seguridad.jpeg" alt="Cámaras de seguridad Hikvision" loading="eager" /></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-content"><div class="hc-badge">Seguridad</div><h2 class="hc-title">Cámaras de Seguridad<br>Hikvision</h2></div>
+              <div class="hc-bottom"><p class="hc-sub">Protege tu hogar o negocio con sistemas CCTV profesionales de alta resolución 4K. Instalación incluida.</p><span class="hc-cta">Ver Paquetes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+            </a>
+            <a href="https://wa.me/593994702091?text=Hola,%20NXT%20COMPU.%20Necesito%20servicio%20técnico." target="_blank" class="hero-card">
+              <div class="hc-bg"><img src="img/catalogos/reparacion_laptops.jpeg" alt="Servicio técnico de laptops" loading="lazy" /></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-content"><div class="hc-badge">Servicio Técnico</div><h2 class="hc-title">Reparación de<br>Laptops y Equipos</h2></div>
+              <div class="hc-bottom"><p class="hc-sub">Diagnóstico de motherboards · Programación de BIOS · Recuperación de datos · Cambio de pantallas</p><span class="hc-cta">Cotizar ahora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+            </a>
+            <a href="catalogo_laptops_accesorios.html" class="hero-card">
+              <div class="hc-bg"><img src="img/catalogos/laptops_accesorios.jpeg" alt="Laptops y accesorios" loading="lazy" /></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-content"><div class="hc-badge">Catálogo</div><h2 class="hc-title">Laptops, Equipos<br>y Accesorios</h2></div>
+              <div class="hc-bottom"><p class="hc-sub">Importación directa · Los mejores precios del mercado · Laptops, mouse, UPS, teclados y más</p><span class="hc-cta">Ver Catálogo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+            </a>
           </div>
           <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Siguiente">&#8250;</button>
         </div>
